@@ -2,6 +2,10 @@ package main;
 
 import lecture7.Student;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
@@ -10,6 +14,21 @@ public class Main {
     }
 
     private void run() {
+        try (BufferedReader reader = Files.newBufferedReader(Path.of("words.txt"))) {
+            Map<String, Integer> words = new TreeMap<>();
+            String line;
+            while ((line = reader.readLine())!=null) {
+                words.merge(line, 1, (a,b) -> a+b ); // (a,b) === (b,a) a+(b+c) === (a+b)+c
+            }
+            for (Map.Entry<String, Integer> entry : words.entrySet()) {
+                System.out.println( entry.getKey() + " : " + entry.getValue());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void run5() {
         Queue<Student> students = new PriorityQueue<>(Comparator
                 .comparingDouble(Student::getRating).reversed()
                 .thenComparing(Comparator.naturalOrder()));

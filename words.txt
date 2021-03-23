@@ -1,0 +1,13 @@
+hello
+computer
+exit
+world
+run
+computer
+computer
+computer
+computer
+exit
+exit
+hello
+privet
